@@ -1,0 +1,32 @@
+{% extends 'todo/basic.html' %}
+
+{% block title %} TO-DO LIST {% endblock %}
+
+{% block body %}
+  <center> <h5>TO-DO LIST</h5> </center>
+              <ul>    
+                    {% for todo_items in all_items %}
+                       <li>
+                            {{todo_items.content}}
+                                <form action="/deleteTodo/{{todo_items.id}}/" style="display:inline;" method="POST">  <br>{% csrf_token %}
+                                    <input type="submit" value="DELETE" class="btn btn-primary btn-sm"></button>
+                                </form>
+                        </li>
+                    {% endfor %}
+                        
+                    
+            </ul>
+
+              <form action="{% url 'adddTodo' %}" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <div class="container">
+                            <!-- <label for="exampleInputEmail1">TO-DO LIST</label> -->
+                            <input type="text" name="content" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Note" required = "True"> <br>
+
+                            <input type="submit" value="ADD" class="btn btn-primary"></button>
+                        </div>
+                    </div>
+            </form>
+
+{% endblock %}
+
